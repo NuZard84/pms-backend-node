@@ -18,7 +18,11 @@
     "express-session": "^1.18.0",
     "mongoose": "^8.2.0",
     "nodemon": "^3.1.0",
+<<<<<<< HEAD
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
+=======
+    "validator": "^13.11.0"
+>>>>>>> 7afa8a186745bd1b9e279fc26a7fe7ddb5066a14
   }
 }
