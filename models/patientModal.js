@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const patientSchema = new mongoose.Schema({
+  isDoctor: { type: Boolean, default: false },
   name: {
     type: String,
     // required: [true, "Please provide a valid name."],
