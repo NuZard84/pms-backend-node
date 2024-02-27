@@ -7,13 +7,13 @@ const paitent = require("../models/patientModal");
 router.post("/register", async (req, res) => {
   try {
     const { email, password, name } = req.body;
-    console.log(email, password);
     const hashedPassword = bcrypt.hashSync(password, 10);
     const newUser = new paitent({
       name: name,
       email: email,
       password: hashedPassword,
     });
+    console.log("regisered user", newUser);
     await newUser.save();
     res
       .status(201)

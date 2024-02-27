@@ -26,6 +26,7 @@ app.use(passport.session());
 
 // routes handler
 app.use("/auth", authRoutes);
+// app.use("/details");
 
 // connect to database
 mongoose.set("strictQuery", false);
@@ -43,7 +44,8 @@ app.get("/", (req, res) => {
   res.send("Hello World !");
 });
 
-const PORT = process.env.PORT || 8080;
+const HOSTNAME = "192.168.152.172";
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server is live on PORT :", PORT);
   console.log("http://localhost:8080");

@@ -11,14 +11,13 @@ passport.use(
     { usernameField: "email", passReqToCallback: true },
     async (req, email, password, done) => {
       // Find the patient in the MongoDB database by email
-      console.log("enter to passport");
       let user;
       if (req.body.isDoctor) {
         user = await Doctor.findOne({ email: email }).select("+password");
       } else {
         user = await Patient.findOne({ email: email }).select("+password");
       }
-      console.log(user);
+      console.log("trying to login : ", user);
 
       // If no record is found in the database, return a message
       if (!user) {
@@ -27,12 +26,10 @@ passport.use(
       }
 
       bcrypt.compare(password, user.password, (err, isMatch) => {
-        console.log(user.password);
         if (isMatch) {
-          console.log(isMatch);
+          console.log("Logged in successfully !");
           return done(null, user);
         } else {
-          console.log("Incorrect password.");
           return done(null, false, { message: "Incorrect password." });
         }
       });
@@ -52,8 +49,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (userData, done) => {
   try {
-    console.log("enter to deserialize");
-    console.log("userData", userData);
     // Find the patient in the MongoDB database by id
     let user;
     if (userData.isDoctor) {
@@ -61,7 +56,6 @@ passport.deserializeUser(async (userData, done) => {
     } else {
       user = await Patient.findById(userData.id);
     }
-    console.log(user);
     done(null, user);
   } catch (error) {
     done(error);
