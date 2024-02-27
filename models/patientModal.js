@@ -6,9 +6,9 @@ const patientSchema = new mongoose.Schema({
   name: {
     type: String,
     // required: [true, "Please provide a valid name."],
-    unique: true,
+    // unique: true,
     maxlength: [40, "A name must have less or equal 40 characters"],
-    minlength: [5, "A name must have more or equal 5 characters"],
+    minlength: [0, "A name must have more or equal 5 characters"],
   },
   gender: {
     type: String,
