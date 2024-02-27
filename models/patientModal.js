@@ -4,18 +4,14 @@ const validator = require("validator");
 const patientSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please provide a valid name."],
-    unique: true,
     maxlength: [40, "A name must have less or equal 40 characters"],
     minlength: [5, "A name must have more or equal 5 characters"],
   },
   gender: {
     type: String,
-    required: [true, "Please provide a gender"],
   },
   age: {
     type: Number,
-    required: [true, "Please provide your age"],
   },
   email: {
     type: String,
@@ -26,12 +22,10 @@ const patientSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: Number,
-    required: [true, "Please provide your Phone number"],
     unique: true,
   },
   username: {
     type: String,
-    required: [true, "Please proivde your username"],
     unique: true,
     minlength: [5, "username must be 5 characters long"],
   },
@@ -39,9 +33,9 @@ const patientSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide your password"],
     select: false,
-    minlength : 8
+    minlength: 8,
   },
 });
 
-const Patient = mongoose.model('Patient', patientSchema)
+const Patient = mongoose.model("Patient", patientSchema);
 module.exports = Patient;
