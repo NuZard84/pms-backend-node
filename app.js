@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT,'192.168.152.26', () => {
   console.log("Server is live on PORT :", PORT);
   console.log("http://localhost:8080");
 });

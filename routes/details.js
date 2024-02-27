@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const paitent = require("../models/patientModal");
+const Paitent = require("../models/patientModal");
 const Doctor = require("../models/doctorModal");
 
 router.post("/patient", async (req, res) => {
   const { email, gender, age, phoneNumber } = req.body;
   console.log(req.body);
   try {
-    const patient = await paitent.findOne({ email });
+    const patient = await Paitent.findOne({ email });
     patient.gender = gender;
     patient.age = age;
     patient.phoneNumber = phoneNumber;
