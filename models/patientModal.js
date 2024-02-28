@@ -70,6 +70,9 @@ const patientSchema = new mongoose.Schema({
         type: String,
         // required : [true, 'Please provide your medical documents']
       },
+      category: {
+        tyep: String,
+      },
     },
   ],
 });
