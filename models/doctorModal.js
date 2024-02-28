@@ -56,10 +56,13 @@ const doctorSchema = new mongoose.Schema({
       ref: "Patient",
     },
   ],
-  isDetailsFilled : {
-    type : Boolean,
-    default : false,
-  }
+  isDetailsFilled: {
+    type: Boolean,
+    default: false,
+  },
+  specialist: {
+    tyep: String,
+  },
 });
 
 const Doctor = mongoose.model("Doctor", doctorSchema);
