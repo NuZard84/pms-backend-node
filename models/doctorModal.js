@@ -6,7 +6,7 @@ const doctorSchema = new mongoose.Schema({
   name: {
     type: String,
     // required: [true, "Please provide a valid name."],
-    unique: true,
+    // unique: true,
     maxlength: [40, "A name must have less or equal 40 characters"],
     minlength: [5, "A name must have more or equal 5 characters"],
   },
@@ -27,13 +27,11 @@ const doctorSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: Number,
-    // required: [true, "Please provide your Phone number"],
-    unique: true,
   },
   username: {
     type: String,
     // required: [true, "Please proivde your username"],
-    unique: true,
+    // unique: true,
     minlength: [5, "username must be 5 characters long"],
   },
   password: {
