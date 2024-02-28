@@ -9,6 +9,8 @@ const authRoutes = require("./routes/auth");
 const passport = require("./config/passport");
 const flash = require("connect-flash");
 const detailRoutes = require("./routes/details");
+const dc = require("./models/doctorModal");
+const consultDocRoutes = require("./routes/consultDoc");
 
 // Middlewares
 app.use(express.json());
@@ -28,6 +30,7 @@ app.use(passport.session());
 // routes handler
 app.use("/auth", authRoutes);
 app.use("/details", detailRoutes);
+app.use("/consult", consultDocRoutes);
 
 // connect to database
 mongoose.set("strictQuery", false);
@@ -42,6 +45,13 @@ mongoose
 
 // starting server on PORT
 app.get("/", (req, res) => {
+  // console.log("enter to /");
+  // const dct = new dc({
+  //   email: "doctor2@gmail.com",
+  //   password: "$2a$10$VFu5xsh5YP2TmOXebRHu0OmSGYVhbCV98lRlYZkYyOvtk2t.6cr02",
+  //   isDoctor: true,
+  // });
+  // await dct.save();
   res.send("Hello World !");
 });
 

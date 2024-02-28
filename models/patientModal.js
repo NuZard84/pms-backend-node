@@ -43,7 +43,7 @@ const patientSchema = new mongoose.Schema({
   },
   Timeline: [
     {
-      symtoms: {
+      symptoms: {
         type: String,
         // required: [true, "Please provide a details about your symtoms"],
       },
@@ -72,6 +72,12 @@ const patientSchema = new mongoose.Schema({
       },
       category: {
         tyep: String,
+      },
+      medicalHistory: {
+        type: String,
+      },
+      medication: {
+        type: String,
       },
     },
   ],
