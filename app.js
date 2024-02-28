@@ -9,8 +9,11 @@ const authRoutes = require("./routes/auth");
 const passport = require("./config/passport");
 const flash = require("connect-flash");
 const detailRoutes = require("./routes/details");
-const dc = require("./models/doctorModal");
-const consultDocRoutes = require("./routes/consultDoc");
+const consultDocRoutes = require("./routes/consult");
+const fetchPatientsRouter = require("./routes/fetchPatients");
+const secKeyRoutes = require("./routes/secKey");
+const queryRoutes = require("./routes/query");
+// const dc = require("./models/doctorModal");
 
 // Middlewares
 app.use(express.json());
@@ -31,6 +34,9 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 app.use("/details", detailRoutes);
 app.use("/consult", consultDocRoutes);
+app.use("/fetchpatients", fetchPatientsRouter);
+app.use("/seckey", secKeyRoutes);
+app.use("/query", queryRoutes);
 
 // connect to database
 mongoose.set("strictQuery", false);

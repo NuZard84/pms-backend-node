@@ -40,7 +40,7 @@ const doctorSchema = new mongoose.Schema({
     select: false,
     minlength: 8,
   },
-  apiKey: {
+  secKey: {
     type: String,
     // required: [true, "Api key is missing"],
   },

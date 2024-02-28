@@ -13,9 +13,10 @@ router.post("/patient", async (req, res) => {
       category: category,
       medicalHistory: medicalHistory ?? "None",
       medications: medications ?? "None",
+      status: false,
     });
     await p.save();
-    // console.log("inside consult doctor : ", p);
+    console.log("inside consult doctor : ", p);
     res
       .status(200)
       .json({ message: "Timeline entry added successfully", data: p });

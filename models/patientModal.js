@@ -32,7 +32,7 @@ const patientSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    unique: true,
+    // unique: true,
     minlength: [5, "username must be 5 characters long"],
   },
   password: {
@@ -54,7 +54,7 @@ const patientSchema = new mongoose.Schema({
         },
       ],
       status: {
-        type: String,
+        type: Boolean,
       },
       prescription: {
         type: String,
@@ -71,12 +71,12 @@ const patientSchema = new mongoose.Schema({
         // required : [true, 'Please provide your medical documents']
       },
       category: {
-        tyep: String,
+        type: String,
       },
       medicalHistory: {
         type: String,
       },
-      medication: {
+      medications: {
         type: String,
       },
     },
