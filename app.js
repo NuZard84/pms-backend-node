@@ -38,6 +38,9 @@ app.use("/fetchpatients", fetchPatientsRouter);
 app.use("/seckey", secKeyRoutes);
 app.use("/query", queryRoutes);
 app.use("/getpatient", require("./routes/getPatient"));
+app.use("/admin", require("./routes/admin"));
+app.use("/chatgpt", require("./routes/chatGpt"));
+// app.use("/reports", require("./routes/reports"));
 
 // connect to database
 mongoose.set("strictQuery", false);
