@@ -9,8 +9,11 @@ const authRoutes = require("./routes/auth");
 const passport = require("./config/passport");
 const flash = require("connect-flash");
 const detailRoutes = require("./routes/details");
-const dc = require("./models/doctorModal");
-const consultDocRoutes = require("./routes/consultDoc");
+const consultDocRoutes = require("./routes/consult");
+const fetchPatientsRouter = require("./routes/fetchPatients");
+const secKeyRoutes = require("./routes/secKey");
+const queryRoutes = require("./routes/query");
+// const dc = require("./models/doctorModal");
 
 // Middlewares
 app.use(express.json());
@@ -31,6 +34,10 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 app.use("/details", detailRoutes);
 app.use("/consult", consultDocRoutes);
+app.use("/fetchpatients", fetchPatientsRouter);
+app.use("/seckey", secKeyRoutes);
+app.use("/query", queryRoutes);
+app.use("/getpatient", require("./routes/getPatient"));
 
 // connect to database
 mongoose.set("strictQuery", false);
@@ -56,7 +63,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, "192.168.152.172", () => {
+app.listen(PORT, "192.168.152.86", () => {
   console.log("Server is live on PORT :", PORT);
   console.log("http://localhost:8080");
 });
