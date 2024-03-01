@@ -1,24 +1,35 @@
 router = require("express").Router();
-const Patient = require("../models/patient");
+const Patient = require("../models/patientModal");
+const Reports = require("../models/reportsModal");
+const multer = require("multer");
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    // Check if request contains file
-    if (!req.files || !req.files.image) {
-      return res.status(400).json({ message: "No image uploaded" });
+    // Validate required fields
+    if (!req.body.patientId || !req.body.report || !req.body.mimetype) {
+      return res
+        .status(400)
+        .json({ message: "Please provide patient ID, report, and mimetype." });
     }
-    // Extract the image file from the request
-    const imageFile = req.files.image;
 
-    // email of patient who is going to be reported
-    const { email } = req.body;
-    // find tha patient by email from database and update
-    const p = Patient.findOne({ email: email });
-    if (!p) {
+    // Check if patient exists
+    const patient = await Patient.findById(req.body.patientId);
+    if (!patient) {
       return res.status(404).json({ message: "Patient not found!" });
     }
+
+    // Create and save report
+    const report = new Reports({
+      report: req.body.report,
+      mimetype: req.body.mimetype,
+      patient: req.body.patient,
+    });
+    await report.save();
+
+    // Send success response
+    res.status(201).json({ message: "Report added successfully!", report });
   } catch (err) {
-    console.log(err);
+    console.error("Error adding report:", err);
     res.status(500).json({ message: "Internal server error!" });
   }
 });

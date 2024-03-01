@@ -5,7 +5,7 @@ const Doctor = require("../models/doctorModal");
 router.post("/doctor", async (req, res) => {
   const { email, name, gender, age, phoneNumber, category, education } =
     req.body;
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const doctor = await Doctor.findOne({ email });
     console.log(doctor);
@@ -21,6 +21,7 @@ router.post("/doctor", async (req, res) => {
     console.log("doctor full details saved into database!");
     return res.status(201).json(doctor);
   } catch (error) {
+    console.log(error);
     return res.status(404).json({
       message: "Error saving details",
     });
