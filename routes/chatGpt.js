@@ -1,16 +1,40 @@
 router = require("express").Router();
 const OpenAI = require("openai").OpenAI;
 const API_KEY = "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";
+const API_KEY_ORG = "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";
 
 router.post("/", async (req, res) => {
   try {
     const { userInput } = req.body;
     console.log("userInput: ", userInput);
     const openai = new OpenAI({ apiKey: API_KEY });
-    const customPrompt = `You are helpfull assistent for doctors. and wants you to help them with their queries. The following will be query provided by doctor and response carefully. = ${userInput}`;
+
+    const cat = {
+      cardiologist: "chest pain, heat attack, high blood pressuur",
+      dermatologist: "skin, hair, nails, skin cancer, external infection",
+      dentist: "teeth, gums, mouth, oral cavity, dental cavity",
+      nurologist:
+        "brain, spinal cord, nerves, headache, migraine, stroke, nerve disorder",
+      orthopedic:
+        "bone, joint, muscle, ligament, tendon, fracture, dislocation",
+      gastroligist:
+        "stomach, intestine, liver, gallbladder, pancreas, ulcer, jaundice, hepatitis",
+    };
+
+    const category = "cardiologist";
+    const age = 58;
+    const gender = "male";
+    const bp = "180/110";
+    const hr = "130";
+    const ol = "24";
+    const temp = "100F";
+
+    let additionalPrompt = `assume you are master in medical science and your name is Medcare AI assistant .they having conversation between you and doctor for particular patient.every time you reply, first sentence shuold be hey i am medcare ai. after these doctor is sending patient data show reply according to it.\n\n Please assume role of an experienced interventional ${category} with over 20 experience in treating ${cat[category]}\n\n patient external data :\n gender : ${gender} \n age:${age}\n\n  Four vitals parameter of patient : \n Blood Pressure : ${bp} \n Heart Rate : ${hr} \n Oxygen Level : ${ol} \n Temperature : ${temp} \n\n ${userInput} \n\n Guidlines for how to output for you(chatgpt):\n provide proper/accurate treatment/ diagnosis according to current symptoms , medical history  , patient external data , test reports(if provided) of patient data.\n suggest medicine for patient according to diagnosis.\n suggest test for patient according to diagnosis.\n suggest lifestyle changes for patient according to diagnosis.\n suggest diet plan for patient according to diagnosis.\n suggest exercise plan for patient according to diagnosis.\n suggest follow up plan for patient according to diagnosis.\n on basis of symptoms which type of disease can be?.\n safe range of vitals parameter according to age , gender and compare with patient vitals parameter.\n\n`;
+
+    const customPrompt = `You are helpfull assistent for doctors. and wants you to help them with their queries. The following will be query provided by doctor and response carefully. userInput = ${userInput}`;
 
     const completion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: customPrompt }],
+      messages: [{ role: "user", content: additionalPrompt }],
       model: "gpt-3.5-turbo",
     });
     console.log(completion.choices[0]);

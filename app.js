@@ -39,8 +39,11 @@ app.use("/seckey", secKeyRoutes);
 app.use("/query", queryRoutes);
 app.use("/getpatient", require("./routes/getPatient"));
 app.use("/admin", require("./routes/admin"));
+app.use("/getdoctor", require("./routes/getDoctor"));
 app.use("/chatgpt", require("./routes/chatGpt"));
 // app.use("/reports", require("./routes/reports"));
+app.use("/verifykey", require("./routes/verifyKey"));
+app.use("/fetchall", require("./routes/fetchAll"));
 
 // connect to database
 mongoose.set("strictQuery", false);
@@ -66,8 +69,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+// const IPv4 = "169.254.243.83";
 const IPv4 = "192.168.152.86";
-app.listen(PORT, IPv4, () => {
+app.listen(PORT, () => {
   console.log("Server is live on PORT :", PORT);
   console.log("http://localhost:8080");
 });

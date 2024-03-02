@@ -44,6 +44,10 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     // required: [true, "Api key is missing"],
   },
+  isKeyVerified: {
+    type: Boolean,
+    default: false,
+  },
   education: {
     type: String,
     // required: [true, "Education field is required"],

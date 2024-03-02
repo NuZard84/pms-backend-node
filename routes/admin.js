@@ -5,12 +5,13 @@ const paitent = require("../models/patientModal");
 
 router.post("/add/doctor", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, secKey } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
     const newDoctor = new Doctor({
       email: email,
       password: hashedPassword,
       isDoctor: true,
+      secKey: secKey,
     });
     await newDoctor.save();
     res

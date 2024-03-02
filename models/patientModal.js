@@ -79,6 +79,21 @@ const patientSchema = new mongoose.Schema({
       medications: {
         type: String,
       },
+      bloodPressure: {
+        type: String,
+      },
+      bodyTemperature: {
+        type: String,
+      },
+      respiratoryRate: {
+        type: String,
+      },
+      heartRate: {
+        type: String,
+      },
+      oxygenLevel: {
+        type: String,
+      },
     },
   ],
 });
