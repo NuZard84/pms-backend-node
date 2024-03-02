@@ -15,6 +15,7 @@ router.post("/patient", async (req, res) => {
       medications: medications ?? "None",
       status: false,
     });
+    console.log(p);
     await p.save();
     console.log("inside consult doctor : ", p);
     res
@@ -29,7 +30,17 @@ router.post("/patient", async (req, res) => {
 router.post("/doctor", async (req, res) => {
   try {
     // doctor can change, status, prescription, result need email to update things
-    const { email, status, prescription, result, checkPointId } = req.body;
+    const {
+      email,
+      status,
+      prescription,
+      result,
+      checkPointId,
+      bloodPressure,
+      bodyTemperature,
+      respiratoryRate,
+      heartRate,
+    } = req.body;
     const p = await Patients.findOne({ email: email });
 
     // find perticular checkpoint by ID
@@ -39,6 +50,10 @@ router.post("/doctor", async (req, res) => {
         ele.status = status;
         ele.prescription = prescription ?? "None";
         ele.result = result ?? "None";
+        ele.bloodPressure = bloodPressure ?? "None";
+        ele.bodyTemperature = bodyTemperature ?? "None";
+        ele.respiratoryRate = respiratoryRate ?? "None";
+        ele.heartRate = heartRate ?? "None";
       }
     });
     await p.save();
@@ -63,6 +78,10 @@ router.post("/update", async (req, res) => {
       status,
       prescription,
       result,
+      bloodPressure,
+      bodyTemperature,
+      respiratoryRate,
+      heartRate,
     } = req.body;
     // first fetch whole timeline of user
     const p = await Patients.findOne({ email: email });
@@ -71,6 +90,7 @@ router.post("/update", async (req, res) => {
     p.Timeline.forEach((checkpoint) => {
       if (checkpoint._id.toString() === checkPointId) {
         console.log("enter");
+        console.log(req.body);
         // Copy existing checkpoint data and update specific fields
         const updatedCheckpoint = {
           ...checkpoint,
@@ -80,13 +100,17 @@ router.post("/update", async (req, res) => {
           status: status || checkpoint.status,
           prescription: prescription || checkpoint.prescription,
           result: result || checkpoint.result,
+          bloodPressure: bloodPressure || checkpoint.bloodPressure,
+          bodyTemperature: bodyTemperature || checkpoint.bodyTemperature,
+          respiratoryRate: respiratoryRate || checkpoint.respiratoryRate,
+          heartRate: heartRate || checkpoint.heartRate,
         };
 
         // Replace the existing checkpoint with the updated data
         Object.assign(checkpoint, updatedCheckpoint);
       }
     });
-
+    console.log("updated timeline : ", p);
     await p.save();
     res.status(200).json({ message: "Timeline updated successfully", data: p });
   } catch (err) {

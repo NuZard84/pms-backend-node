@@ -8,7 +8,7 @@ const doctorSchema = new mongoose.Schema({
     // required: [true, "Please provide a valid name."],
     // unique: true,
     maxlength: [40, "A name must have less or equal 40 characters"],
-    minlength: [5, "A name must have more or equal 5 characters"],
+    minlength: [0, "A name must have more or equal 5 characters"],
   },
   gender: {
     type: String,
@@ -44,6 +44,10 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     // required: [true, "Api key is missing"],
   },
+  isKeyVerified: {
+    type: Boolean,
+    default: false,
+  },
   education: {
     type: String,
     // required: [true, "Education field is required"],
@@ -59,7 +63,7 @@ const doctorSchema = new mongoose.Schema({
     default: false,
   },
   specialist: {
-    tyep: String,
+    type: String,
   },
 });
 
